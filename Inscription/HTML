@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Page d'inscritpion</title>
+        <link rel="stylesheet" type="text/css" href="css/style_insc.css">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <div class="nav">
+        <a href="index.php">Accueil</a>
+        <a href="connexion.php">Connexion</a>
+    </div>
+    <div class="container">
+
+        <div class="center">
+
+
+            <form method="post" action="" >
+                <h1 class="inscription">Inscription</h1>
+                <table class="formulaire">
+                    <tr>
+                        <td align="right">
+                            <label for="pseudo">Pseudo :</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label for="mail">Mail :</label>
+                        </td>
+                        <td>
+                            <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label for="mail2">Confirmation du mail :</label>
+                        </td>
+                        <td>
+                            <input type="email" placeholder="Confirmez votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label for="mdp">Mot de passe :</label>
+                        </td>
+                        <td>
+                            <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label for="mdp2">Confirmez votre mdp :</label>
+                        </td>
+                        <td>
+                            <input type="password" placeholder="Votre mot de passe" id="mdp2" name="mdp2" />
+                        </td>
+                    </tr>
+
+                    <tr>
+<!--                        <td></td>-->
+                        <td align="center" colspan="2">
+                            <br />
+                            <input type="submit" name="formInscription" value="Je m'inscris"/>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </form>
+            <?php
+            if(isset($erreur))
+            {
+                echo '<p class="erreur">' . $erreur . '</p>';
+            }
+
+            ?>
+        </div>
+    </div>
+
+    </body>
+
+</html>
