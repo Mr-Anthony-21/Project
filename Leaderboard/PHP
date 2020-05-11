@@ -1,0 +1,9 @@
+<?php
+session_start();
+$bdd = new PDO('mysql:host=db5000212939.hosting-data.io;dbname=dbs207777;charset=utf8', 'dbu215774', 'BDDMemoryGame76-');
+
+if(!isset($_SESSION['connecter']) || $_SESSION['connecter'] == 0){
+    $_SESSION['connecter'] = 0;
+    header('location:index.php');
+}
+?>
