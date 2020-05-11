@@ -1,0 +1,225 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+html {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(circle, #222, #000);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  min-height: 350px;
+}
+
+h1 {
+  color: #fff;
+  font-size: 2%;
+  font-weight: 900;
+  margin: 0 0 2em;
+}
+@media (min-width: 450px) {
+  h1 {
+    font-size: 1.75em;
+  }
+}
+@media (min-width: 760px) {
+  h1 {
+    font-size: 3.25em;
+  }
+}
+@media (min-width: 900px) {
+  h1 {
+    font-size: 5.25em;
+    margin: 0 0 1em;
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 10vh;
+  width: 100vw;
+}
+.nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 6.5vh;
+  padding-right: 5%;
+}
+
+.container2 {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.container2 .cote {
+  width: 20vw;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.win {
+  position: fixed;
+  right: 0;
+  font-size: 10px;
+  height: 10%;
+  width: 50%;
+}
+.win #win {
+  text-align: center;
+  color: #fff;
+  display: none;
+}
+
+#navbar {
+  position: relative;
+  min-width: 20%;
+  top: 20%;
+}
+#navbar button, #navbar input[type=submit] {
+  min-width: 200px;
+  width: 50%;
+  margin: auto;
+  font-size: 1rem;
+  padding: 1.25rem;
+  display: block;
+  background-color: #AEA8A5;
+  border: 1px solid black;
+  color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+#navbar button:hover, #navbar input[type=submit]:hover {
+  background-color: #fff;
+  color: black;
+  border-color: #AEA8A5;
+}
+#navbar button:active, #navbar input[type=submit]:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+#memory-game {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+  position: relative;
+  top: 10%;
+}
+
+.memory-card {
+  min-width: calc(15*0.65%);
+  max-width: 50px;
+  margin: 1.37%;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.memory-card:active {
+  transform: scale(0.95);
+  transition: transform 0.25s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+.front-face-0 {
+  background-image: url("../MemoryGamesImgs/AC.svg");
+}
+.front-face-1 {
+  background-image: url("../MemoryGamesImgs/AD.svg");
+}
+.front-face-2 {
+  background-image: url("../MemoryGamesImgs/AH.svg");
+}
+.front-face-3 {
+  background-image: url("../MemoryGamesImgs/AS.svg");
+}
+.front-face-4 {
+  background-image: url("../MemoryGamesImgs/KC.svg");
+}
+.front-face-5 {
+  background-image: url("../MemoryGamesImgs/KD.svg");
+}
+.front-face-6 {
+  background-image: url("../MemoryGamesImgs/KH.svg");
+}
+.front-face-7 {
+  background-image: url("../MemoryGamesImgs/KS.svg");
+}
+.front-face-8 {
+  background-image: url("../MemoryGamesImgs/QC.svg");
+}
+.front-face-9 {
+  background-image: url("../MemoryGamesImgs/QD.svg");
+}
+.front-face-10 {
+  background-image: url("../MemoryGamesImgs/QH.svg");
+}
+.front-face-11 {
+  background-image: url("../MemoryGamesImgs/QS.svg");
+}
+.front-face-12 {
+  background-image: url("../MemoryGamesImgs/10C.svg");
+}
+.front-face-13 {
+  background-image: url("../MemoryGamesImgs/10D.svg");
+}
+.front-face-14 {
+  background-image: url("../MemoryGamesImgs/10H.svg");
+}
+.front-face-15 {
+  background-image: url("../MemoryGamesImgs/10S.svg");
+}
+.front-face-16 {
+  background-image: url("../MemoryGamesImgs/10C.svg");
+}
+.front-face-17 {
+  background-image: url("../MemoryGamesImgs/10D.svg");
+}
+.front-face-18 {
+  background-image: url("../MemoryGamesImgs/10H.svg");
+}
+.front-face-19 {
+  background-image: url("../MemoryGamesImgs/10S.svg");
+}
+
+.back-face {
+  background-image: url("../MemoryGamesImgs/Card_back.svg");
+}
