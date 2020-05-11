@@ -1,0 +1,23 @@
+<?php
+session_start();
+$bdd = new PDO('mysql:host=db5000212939.hosting-data.io;dbname=dbs207777;charset=utf8', 'dbu215774', 'BDDMemoryGame76-');
+
+if(!isset($_SESSION['connecter'])){
+    $_SESSION['connecter'] = 0;
+    header('location:index.php');
+}
+
+
+$req = $bdd->prepare('SELECT save, cpt, cptCard FROM utilisateurs WHERE ID = :sessionID');
+$req->execute(array(
+    'sessionID' => $_SESSION['ID']
+));
+$_SESSION['charge'] = $req->fetchAll();
+$_SESSION['charge'] = array_pop($_SESSION['charge']);
+
+$_SESSION['game'] = $_SESSION['charge'][0];
+$_SESSION['cpt'] = $_SESSION['charge'][1];
+$_SESSION['cptCard'] = $_SESSION['charge'][2];
+
+header('location:http://nicolas-breant.fr/jeu.php');
+?>
