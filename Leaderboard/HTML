@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeaderBoard - MemoryGame</title>
+    <link rel="stylesheet" type="text/css" href="css/styleJeu.css">
+    <link rel="stylesheet" type="text/css" href="css/styleLeaderboard.css">
+</head>
+<body>
+<div class="nav">
+    <a href="index.php">Accueil</a>
+    <?php
+    if($_SESSION['connecter']== 1){
+        echo "<a href='deconnexion.php'>Déconnexion</a>";
+    }
+    ?>
+</div>
+
+<div class="container2">
+    <div class="cote"></div>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th><a href="http://nicolas-breant.fr/leaderboard.php">Pseudo</a></th><th><a href="?score=scoreEasy">MaxScore Easy</a></th><th><a href="?score=scoreMedium">MaxScore Medium</a></th><th><a href="?score=scoreHard">MaxScore Hard</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if(isset($_GET["score"])){
+                    if($_GET["score"] === "scoreEasy"){
+                        $req = $bdd->prepare('SELECT pseudo, scoreEasy, scoreMedium, scoreHard FROM utilisateurs WHERE scoreEasy > 0 ORDER BY scoreEasy DESC');
+                        $req->execute();
+                    }
+                    if($_GET["score"] === "scoreMedium"){
+                        $req = $bdd->prepare('SELECT pseudo, scoreEasy, scoreMedium, scoreHard FROM utilisateurs WHERE scoreMedium > 0 ORDER BY scoreMedium DESC');
+                        $req->execute();
+                    }
+                    if($_GET["score"] === "scoreHard"){
+                        $req = $bdd->prepare('SELECT pseudo, scoreEasy, scoreMedium, scoreHard FROM utilisateurs WHERE scoreHard > 0 ORDER BY scoreHard DESC');
+                        $req->execute();
+                    }
+                }
+
+                if (!isset($_GET["score"])){
+                    $req = $bdd->prepare('SELECT pseudo, scoreEasy, scoreMedium, scoreHard FROM utilisateurs WHERE scoreEasy > 0 || scoreMedium > 0 || scoreHard > 0  ORDER BY pseudo DESC');
+                    $req->execute();
+                }
+
+                $res = $req->fetchAll();
+                $resultat = array_pop($res);
+                while($resultat != NULL){
+                    echo "<tr>";
+                    echo "    <td>" . $resultat[0] . "</td>";
+                    echo "    <td>" . $resultat[1] . "</td>";
+                    echo "    <td>" . $resultat[2] . "</td>";
+                    echo "    <td>" . $resultat[3] . "</td>";
+                    echo "<tr>";
+
+                    $resultat = array_pop($res);
+                }
+                ?>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="cote"></div>
+</div>
+</body>
+</html>
