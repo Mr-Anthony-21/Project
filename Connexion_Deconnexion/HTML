@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page de connexion</title>
+    <link rel="stylesheet" type="text/css" href="css/style_insc.css">
+
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="nav">
+    <a href="index.php">Accueil</a>
+    <a href="inscription.php">Inscription</a>
+</div>
+<div class="container">
+    <div align="center" class="center">
+        <form method="post" action="">
+            <h1 class="inscription">Connexion</h1>
+            <table>
+                <tr>
+                    <td align="right">
+                        <label for="pseudo">Pseudo :</label>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="mdp">Mot de passe :</label>
+                    </td>
+                    <td>
+                        <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
+                    </td>
+                </tr>
+            </table>
+
+            <div align="center">
+                <input type="submit" name="formConnexion" value="Je me connecte"/>
+            </div>
+
+
+        </form>
+        <?php
+        if(isset($erreur))
+        {
+            echo $erreur;
+        }
+
+        ?>
+    </div>
+</div>
+
+</body>
+
+</html>
