@@ -1,0 +1,37 @@
+<?php
+$bdd = new PDO('mysql:host=db5000212939.hosting-data.io;dbname=dbs207777;charset=utf8', 'dbu215774', 'BDDMemoryGame76-');
+
+if(isset($_POST['formConnexion'])) {
+
+    $pseudo = addslashes(htmlspecialchars($_POST['pseudo']));
+    $mdp = sha1(addslashes(htmlspecialchars($_POST['mdp'])));
+
+    $reponse = $bdd->query("SELECT ID, pseudo FROM utilisateurs WHERE pseudo = '$pseudo' AND motdepasse = '$mdp' ");
+    while ($donnees = $reponse->fetch()) {
+
+
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+            $_SESSION['pseudo'] = $donnees['pseudo'];
+            $_SESSION['ID'] = $donnees['ID'];
+            $_SESSION['connecter'] = 1;
+            if ($pseudo == "admin"){
+                $_SESSION['admin'] = 1;
+            }
+        }
+        header('Location: index.php');
+    }
+
+}
+?>
+
+<?php
+session_start();
+
+$_SESSION = array();
+if (session_status() == PHP_SESSION_ACTIVE){
+    session_destroy();
+}
+header("Location: index.php");
+?>
