@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory Game</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/monstyle.css">
+</head>
+<body>
+<nav>
+    <?php
+    if($_SESSION['connecter'] == 0){
+        echo "<a href='connexion.php' id='connexion'>Connexion</a>";
+        echo "<a href='inscription.php' id='inscription'>Inscription</a>";
+    } else {
+        echo "<a href='deconnexion.php' id='deconnexion'>Déconnexion</a>";
+        echo "<a href='leaderboard.php' id='leaderboard'>LeaderBoard</a>";
+    }
+
+    ?>
+</nav>
+<header>
+
+    <h1>Bienvenue sur Memory Game <?php
+        if ($_SESSION['connecter'] == 1){
+            if (isset($pseudo)){
+                echo $pseudo;
+            }
+        }
+        ?> !
+    </h1>
+</header>
+<main>
+    <?php
+    if($_SESSION['connecter']== 1){
+        echo "<a href='jeu.php' class='jeuref'>Jouer!</a>";
+    } else {
+        echo "<h1>Veuillez vous connecter</h1>";
+    }
+
+    ?>
+</main>
+
+</body>
+</html>
