@@ -10,3 +10,5 @@ Ici les languages de programmation utilisés sont le HTML, le CSS, le PHP et le 
 Pour ce projet il y a un système d'inscription et de connection, ce qui permet d'avoir un système de sauvegarde de partie et un classement
 de vos records parmi tous les joueurs inscrit. Il y a aussi 3 niveaux de difficultés, plus le niveau augmente plus il y a de paire 
 à retrouver.
+
+Code en cours de modification dût au fait qu'il s'agisse d'un code lié à la base de donnée du binôme avec qui j'ai réalisé le projet.
