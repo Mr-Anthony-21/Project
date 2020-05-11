@@ -1,0 +1,81 @@
+<?php
+session_start();
+$bdd = new PDO('mysql:host=db5000212939.hosting-data.io;dbname=dbs207777;charset=utf8', 'dbu215774', 'BDDMemoryGame76-');
+if(!isset($_SESSION['connecter'])){
+    $_SESSION['connecter'] = 0;
+    header('location:index.php');
+}
+
+$req = $bdd->prepare('SELECT scoreEasy, scoreMedium, scoreHard FROM utilisateurs WHERE ID = :sessionID');
+$req->execute(array(
+    'sessionID' => $_SESSION['ID']
+));
+$res = $req->fetchAll();
+$res = array_pop($res);
+//var_dump($_POST['scoreEasy']);die;
+if(isset($_POST['valeur'])) {
+    $save = ($_POST['valeur']);
+    $cpt = ($_POST['cpt']);
+    $cptCard = ($_POST['cptCard']);
+    // Un des 3 scores au maximum doit être différent de null
+    if(!empty($_POST['scoreEasy'])){
+        $scoreEasy = ($_POST['scoreEasy']);
+    }
+    if(!empty($_POST['scoreMedium'])){
+        $scoreMedium = ($_POST['scoreMedium']);
+    }
+    if(!empty($_POST['scoreHard'])){
+        $scoreHard = ($_POST['scoreHard']);
+    }
+}
+
+if(isset($scoreEasy)){
+    $req = $bdd->prepare('UPDATE utilisateurs SET save = :save, cpt = :cpt, cptCard = :cptCard, scoreEasy = :score WHERE ID = :sessionID');
+}
+if(isset($scoreMedium)){
+    $req = $bdd->prepare('UPDATE utilisateurs SET save = :save, cpt = :cpt, cptCard = :cptCard, scoreMedium = :score WHERE ID = :sessionID');
+}
+
+if(isset($scoreHard)){
+    $req = $bdd->prepare('UPDATE utilisateurs SET save = :save, cpt = :cpt, cptCard = :cptCard, scoreHard = :score WHERE ID = :sessionID');
+}
+
+// Si un score existe pour une des difficultés, on l'enregistre en bdd. Sinon sauvegarde la partie en cours
+if(isset($scoreEasy) || isset($scoreMedium) || isset($scoreHard)){
+    $score = $scoreEasy ?? $scoreMedium ?? $scoreHard;
+    fct($req, $save, $cpt, $cptCard, $score);
+} else {
+    $req = $bdd->prepare('UPDATE utilisateurs SET save = :save, cpt = :cpt, cptCard = :cptCard WHERE ID = :sessionID');
+    fct($req, $save, $cpt, $cptCard, null);
+}
+
+/**
+ * // TODO:
+ * @param PDOStatement $req : La requête //todo
+ * @param string $save :
+ * @param string $cpt : Le compteur //todo
+ * @param string $cptCard :
+ * @param string $score :
+ */
+function fct(PDOStatement $req, string $save, string $cpt, string $cptCard, string $score = null): void {
+    $params = [
+        'save' => $save,
+        'cpt' => $cpt,
+        'cptCard' => $cptCard,
+        'sessionID' => $_SESSION['ID'],
+//        'score' => $score // TODO: tester ça ou isset en dessous
+    ];
+
+    if (isset($score)) { // todo
+        $params['score'] = $score;
+    }
+
+    try {
+        $bool = $req->execute($params);
+    } catch(Exception $e) {
+//        var_dump("Erreur".$e->getMessage()."   -    ".$e->getTraceAsString());
+    }
+}
+
+header('location:http://nicolas-breant.fr/charger.php');
+?>
