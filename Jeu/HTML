@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <link rel="stylesheet" type="text/css" href="css/styleJeu.css">
+</head>
+<body>
+<div class="nav">
+    <a href="index.php">Accueil</a>
+    <?php
+    if($_SESSION['connecter']== 1){
+        echo "<a href='deconnexion.php'>Déconnexion</a>";
+    }
+    ?>
+</div>
+<div class="container2">
+    <div class="cote">
+        <section id="navbar">
+            <button  type="button" id="easy" onclick="easy()">Easy</button>
+            <button  type="button" id="medium" onclick="medium()">Medium</button>
+            <button  type="button" id="hard" onclick="hard()">Hard</button>
+            <button  type="button" onclick="extreme()" style="visibility: hidden">Extreme</button>
+
+            <div class="sauvegarde">
+                <form action="sauvegarde.php" method="post" id="sauvegarde">
+                    <input id="save" type="text" name="valeur" style="visibility: hidden">
+                    <input id="cpt" type="text" name="cpt" style="visibility: hidden">
+                    <input id="cptCard" type="text" name="cptCard" style="visibility: hidden">
+                    <input id="scoreEasy" type="text" name="scoreEasy" style="visibility: hidden">
+                    <input id="scoreMedium" type="text" name="scoreMedium" style="visibility: hidden">
+                    <input id="scoreHard" type="text" name="scoreHard" style="visibility: hidden">
+                    <input id="BtSauvegarde" type="submit" onclick="push()" value="Sauvegarder Score"style="visibility: hidden">
+                </form>
+                <form action="charger.php" method="post">
+                    <input class="charger" type="submit" value="Charger" >
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="container">
+        <div class="win">
+            <h1 id="win">hey</h1>
+        </div>
+        <section id="memory-game">
+            <?php
+            if (isset($_SESSION['charge'])){
+                echo $_SESSION['game'];
+            }
+            ?>
+        </section>
+    </div>
+
+    <div class="cote">
+        <?php
+        if (isset($_SESSION['charge'])){
+            echo"<p id='charged' style='display: none'>charged</p>";
+            echo"<p id='cpt1' style='display: none'>" . $_SESSION['cpt'] . "</p>";
+            echo $_SESSION['cpt'];
+            echo"<p id='cptCards1' style='display: none'>" . $_SESSION['cptCard'] . "</p>";
+        }
+        ?>
+    </div>
+</div>
+<script src="script.js"></script>
+<script>
+
+    let Easy = 0;
+    let Medium = 0;
+    let Hard = 0;
+
+    function test(){
+        if(Plateau.carte === 8){
+            Easy = 1;
+            Medium = 0;
+            Hard = 0;
+        } else if (Plateau.carte === 16){
+            Easy = 0;
+            Medium = 1;
+            Hard = 0;
+        } else if (Plateau.carte === 24){
+            Easy = 0;
+            Medium = 0;
+            Hard = 1;
+        } else {
+            Easy = 0;
+            Medium = 0;
+            Hard = 0;
+        }
+    }
+
+    if(document.getElementById('charged').innerText === "charged"){
+        cpt = document.getElementById('cpt1').innerHTML;
+        cptCards = parseInt(document.getElementById('cptCards1').innerHTML);
+        let a = document.getElementById('memory-game').innerHTML;
+        let count = (a.match(/memory-card/g) || []).length;
+        Plateau = new Memory(count);
+        init();
+    }
+    // let Plateau = new Memory(12*2);
+    // Plateau.createCardInID("jeu");
+    // init();
+
+
+    function easy(){
+        reset();
+        Plateau = new Memory(4*2);
+        Plateau.createCardInID("jeu");
+        init();
+    }
+    function medium(){
+        reset();
+        Plateau = new Memory(8*2);
+        Plateau.createCardInID("jeu");
+        init();
+    }
+    function hard(){
+        reset();
+        Plateau = new Memory(12*2);
+        Plateau.createCardInID("jeu");
+        init();
+    }
+    // function extreme(){
+    //     reset();
+    //     Plateau = new Memory(20*2);
+    //     Plateau.createCardInID("jeu");
+    //     init();
+    // }
+
+    function reset(){
+        document.getElementById("memory-game").innerHTML = "";
+        resetBoard();
+        cptCards = 0;
+        cpt = 0;
+        let elem = document.getElementById('win');
+        elem.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
