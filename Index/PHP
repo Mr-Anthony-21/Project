@@ -1,0 +1,26 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['connecter'])){
+    $_SESSION['connecter'] = 0;
+}
+
+
+if (isset($_SESSION['connecter'])) {
+    $connecter = $_SESSION['connecter'];
+    if($connecter == 1) {
+        if (isset($_SESSION['ID'])) {
+            $ID = $_SESSION['ID'];
+        }
+        if (isset($_SESSION['pseudo'])) {
+            $pseudo = $_SESSION['pseudo'];
+        }
+
+
+    }
+}
+
+
+$bdd = new PDO('mysql:host=db5000212939.hosting-data.io;dbname=dbs207777;charset=utf8', 'dbu215774', 'BDDMemoryGame76-');
+
+?>
