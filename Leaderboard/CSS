@@ -1,0 +1,22 @@
+table {
+  position: relative;
+  top: 10%;
+  border: 0.25vw solid #ffffff;
+  border-collapse: collapse;
+  color: white;
+}
+table th, table td {
+  border: 0.25vw solid #ffffff;
+}
+table thead {
+  font-size: 2vw;
+}
+table tbody {
+  font-size: 1.5vw;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
